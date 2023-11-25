@@ -4,6 +4,7 @@
 //
 //  Created by miwa on 2023/11/25.
 //
+//  This code is based on https://github.com/ggerganov/llama.cpp/tree/master/examples/batched.swift . The code is under MIT LICENSE.
 
 import Foundation
 import llama
