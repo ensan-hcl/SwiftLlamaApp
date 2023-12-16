@@ -7,24 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551F079C2B2CACF7008E6884 /* LlamaContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551F079B2B2CACF7008E6884 /* LlamaContext.swift */; };
 		558E03672B1181600059048D /* SwiftLlamaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E03662B1181600059048D /* SwiftLlamaApp.swift */; };
 		558E03692B1181600059048D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E03682B1181600059048D /* ContentView.swift */; };
 		558E036B2B1181610059048D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558E036A2B1181610059048D /* Assets.xcassets */; };
 		558E036F2B1181610059048D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558E036E2B1181610059048D /* Preview Assets.xcassets */; };
-		558E03772B11818C0059048D /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 558E03762B11818C0059048D /* llama */; };
-		558E03892B11C3EF0059048D /* LlamaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E03882B11C3EF0059048D /* LlamaModel.swift */; };
-		558E038C2B11C8D40059048D /* llama-2-13b.Q4_0.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 558E038B2B11C8D40059048D /* llama-2-13b.Q4_0.gguf */; };
+		558E03892B11C3EF0059048D /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558E03882B11C3EF0059048D /* LlamaState.swift */; };
+		55CF43702B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 55CF436F2B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf */; };
+		55CF43722B2DF11A00DFBDDA /* LlamaGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF43712B2DF11A00DFBDDA /* LlamaGrammar.swift */; };
+		55CF43782B2DF4F200DFBDDA /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 55CF43772B2DF4F200DFBDDA /* llama */; };
+		55CF43802B2E03DC00DFBDDA /* grammar-parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CF437E2B2E03DC00DFBDDA /* grammar-parser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		551F079B2B2CACF7008E6884 /* LlamaContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaContext.swift; sourceTree = "<group>"; };
 		558E03632B1181600059048D /* SwiftLlamaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLlamaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558E03662B1181600059048D /* SwiftLlamaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLlamaApp.swift; sourceTree = "<group>"; };
 		558E03682B1181600059048D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		558E036A2B1181610059048D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		558E036C2B1181610059048D /* SwiftLlamaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftLlamaApp.entitlements; sourceTree = "<group>"; };
 		558E036E2B1181610059048D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		558E03882B11C3EF0059048D /* LlamaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaModel.swift; sourceTree = "<group>"; };
-		558E038B2B11C8D40059048D /* llama-2-13b.Q4_0.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "llama-2-13b.Q4_0.gguf"; sourceTree = "<group>"; };
+		558E03882B11C3EF0059048D /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
+		55CF436F2B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf"; path = "../../../../llama.cpp/examples/llama.swiftui/llama.swiftui/Resources/models/ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf"; sourceTree = "<group>"; };
+		55CF43712B2DF11A00DFBDDA /* LlamaGrammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaGrammar.swift; sourceTree = "<group>"; };
+		55CF437E2B2E03DC00DFBDDA /* grammar-parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "grammar-parser.cpp"; sourceTree = "<group>"; };
+		55CF437F2B2E03DC00DFBDDA /* grammar-parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "grammar-parser.h"; sourceTree = "<group>"; };
+		55CF43822B2E082C00DFBDDA /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,18 +40,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				558E03772B11818C0059048D /* llama in Frameworks */,
+				55CF43782B2DF4F200DFBDDA /* llama in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551F079F2B2CAFBE008E6884 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				55CF436F2B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		558E035A2B1181600059048D = {
 			isa = PBXGroup;
 			children = (
 				558E03652B1181600059048D /* SwiftLlamaApp */,
 				558E03642B1181600059048D /* Products */,
+				55CF43732B2DF45F00DFBDDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,7 +78,10 @@
 				558E03662B1181600059048D /* SwiftLlamaApp.swift */,
 				558E038A2B11C8BF0059048D /* Resources */,
 				558E03682B1181600059048D /* ContentView.swift */,
-				558E03882B11C3EF0059048D /* LlamaModel.swift */,
+				558E03882B11C3EF0059048D /* LlamaState.swift */,
+				55CF43812B2E06B500DFBDDA /* LlamaHelpers */,
+				551F079B2B2CACF7008E6884 /* LlamaContext.swift */,
+				55CF43712B2DF11A00DFBDDA /* LlamaGrammar.swift */,
 				558E036A2B1181610059048D /* Assets.xcassets */,
 				558E036C2B1181610059048D /* SwiftLlamaApp.entitlements */,
 				558E036D2B1181610059048D /* Preview Content */,
@@ -80,9 +100,26 @@
 		558E038A2B11C8BF0059048D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				558E038B2B11C8D40059048D /* llama-2-13b.Q4_0.gguf */,
+				551F079F2B2CAFBE008E6884 /* models */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		55CF43732B2DF45F00DFBDDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55CF43812B2E06B500DFBDDA /* LlamaHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				55CF437E2B2E03DC00DFBDDA /* grammar-parser.cpp */,
+				55CF437F2B2E03DC00DFBDDA /* grammar-parser.h */,
+				55CF43822B2E082C00DFBDDA /* module.modulemap */,
+			);
+			path = LlamaHelpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,7 +139,7 @@
 			);
 			name = SwiftLlamaApp;
 			packageProductDependencies = (
-				558E03762B11818C0059048D /* llama */,
+				55CF43772B2DF4F200DFBDDA /* llama */,
 			);
 			productName = SwiftLlamaApp;
 			productReference = 558E03632B1181600059048D /* SwiftLlamaApp.app */;
@@ -120,6 +157,7 @@
 				TargetAttributes = {
 					558E03622B1181600059048D = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1510;
 					};
 				};
 			};
@@ -133,7 +171,7 @@
 			);
 			mainGroup = 558E035A2B1181600059048D;
 			packageReferences = (
-				558E03752B11818C0059048D /* XCRemoteSwiftPackageReference "llama" */,
+				55CF43762B2DF4F200DFBDDA /* XCRemoteSwiftPackageReference "llama" */,
 			);
 			productRefGroup = 558E03642B1181600059048D /* Products */;
 			projectDirPath = "";
@@ -149,9 +187,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55CF43702B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf in Resources */,
 				558E036F2B1181610059048D /* Preview Assets.xcassets in Resources */,
 				558E036B2B1181610059048D /* Assets.xcassets in Resources */,
-				558E038C2B11C8D40059048D /* llama-2-13b.Q4_0.gguf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,8 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				558E03892B11C3EF0059048D /* LlamaModel.swift in Sources */,
+				558E03892B11C3EF0059048D /* LlamaState.swift in Sources */,
+				551F079C2B2CACF7008E6884 /* LlamaContext.swift in Sources */,
+				55CF43802B2E03DC00DFBDDA /* grammar-parser.cpp in Sources */,
 				558E03692B1181600059048D /* ContentView.swift in Sources */,
+				55CF43722B2DF11A00DFBDDA /* LlamaGrammar.swift in Sources */,
 				558E03672B1181600059048D /* SwiftLlamaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,7 +268,9 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-cxx-interoperability-mode=default";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_INCLUDE_PATHS = SwiftLlamaApp/LlamaHelpers;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -281,7 +324,9 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "-cxx-interoperability-mode=default";
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_INCLUDE_PATHS = SwiftLlamaApp/LlamaHelpers;
 			};
 			name = Release;
 		};
@@ -290,6 +335,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_OPTIMIZATION = time;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftLlamaApp/SwiftLlamaApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -312,6 +359,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LLVM_LTO = YES_THIN;
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLlamaApp;
@@ -320,6 +368,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -330,6 +379,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_OPTIMIZATION = time;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SwiftLlamaApp/SwiftLlamaApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -337,6 +388,7 @@
 				DEVELOPMENT_TEAM = 9S3UXHYP65;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -351,6 +403,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LLVM_LTO = YES_THIN;
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.SwiftLlamaApp;
@@ -358,6 +411,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -387,9 +441,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		558E03752B11818C0059048D /* XCRemoteSwiftPackageReference "llama" */ = {
+		55CF43762B2DF4F200DFBDDA /* XCRemoteSwiftPackageReference "llama" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ggerganov/llama.cpp";
+			repositoryURL = "https://github.com/ensan-hcl/llama.cpp";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -398,9 +452,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		558E03762B11818C0059048D /* llama */ = {
+		55CF43772B2DF4F200DFBDDA /* llama */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 558E03752B11818C0059048D /* XCRemoteSwiftPackageReference "llama" */;
+			package = 55CF43762B2DF4F200DFBDDA /* XCRemoteSwiftPackageReference "llama" */;
 			productName = llama;
 		};
 /* End XCSwiftPackageProductDependency section */

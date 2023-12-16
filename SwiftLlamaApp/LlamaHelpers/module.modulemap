@@ -1,0 +1,12 @@
+//
+//  LlamaHelpers.modulemap
+//  SwiftLlamaApp
+//
+//  Created by miwa on 2023/12/17.
+//
+
+module LlamaHelpers {
+    header "grammar-parser.h"
+    requires cplusplus
+    export *
+}
