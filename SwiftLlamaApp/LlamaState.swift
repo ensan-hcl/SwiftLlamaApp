@@ -136,12 +136,9 @@ class LlamaState: ObservableObject {
         var targetMessageId = last.id
         await llamaContext.completion_init(text: prompt)
         var reversed = false
-        guard let grammar = LlamaGrammar.japanese_chat else {
-            return
-        }
         while await llamaContext.n_cur < llamaContext.n_len && !Task.isCancelled && !reversed {
 
-            let completion = await llamaContext.completion_loop_with_grammar(grammar: grammar)
+            let completion = await llamaContext.completion_loop()
             var newResult = self.generatingMessage + completion.piece
             // reverse promptが発見されたら停止する
             if let userPromptPrefix, newResult.suffix(userPromptPrefix.count + 10).contains(userPromptPrefix) {

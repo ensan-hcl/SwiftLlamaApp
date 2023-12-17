@@ -134,11 +134,10 @@ actor LlamaContext {
         for token_id in 0..<n_vocab {
             candidates.append(llama_token_data(id: token_id, logit: logits![Int(token_id)], p: 0.0))
         }
-        //        print("sample")
         candidates.withUnsafeMutableBufferPointer() { buffer in
             // common/sampling.hを参照すると良い
             var candidates_p = llama_token_data_array(data: buffer.baseAddress, size: buffer.count, sorted: false)
-            llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
+            // llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
             llama_sample_top_k(context, &candidates_p, 40, 2)
             llama_sample_top_p(context, &candidates_p, 0.95, 2)
             llama_sample_min_p(context, &candidates_p, 0.05, 2)
