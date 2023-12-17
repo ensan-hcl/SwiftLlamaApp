@@ -30,6 +30,9 @@ struct ContentView: View {
                 .textFieldStyle(.roundedBorder)
             HStack {
                 Button {
+                    guard !self.message.isEmpty else {
+                        return
+                    }
                     self.model.addChatMessage(message, instruction: instruction, example: chatExample, userMessagePrefix: "User:", aiMessagePrefix: "Alan:")
                     self.message = ""
                 } label: {
