@@ -40,6 +40,8 @@ class LlamaState: ObservableObject {
     private var modelUrl: URL? {
         #if os(macOS)
         Bundle.main.url(forResource: "ELYZA-japanese-Llama-2-7b-instruct-q4_K_M", withExtension: "gguf")
+        #elseif os(iOS)
+        Bundle.main.bundleURL.appending(path: "tinyllama-1.1b-intermediate-step-715k-1.5t.Q2_K.gguf")
         #endif
     }
     init() {
@@ -134,8 +136,12 @@ class LlamaState: ObservableObject {
         var targetMessageId = last.id
         await llamaContext.completion_init(text: prompt)
         var reversed = false
+        guard let grammar = LlamaGrammar.japanese_chat else {
+            return
+        }
         while await llamaContext.n_cur < llamaContext.n_len && !Task.isCancelled && !reversed {
-            let completion = await llamaContext.completion_loop()
+
+            let completion = await llamaContext.completion_loop_with_grammar(grammar: grammar)
             var newResult = self.generatingMessage + completion.piece
             // reverse promptが発見されたら停止する
             if let userPromptPrefix, newResult.suffix(userPromptPrefix.count + 10).contains(userPromptPrefix) {
@@ -205,6 +211,9 @@ class LlamaState: ObservableObject {
         while await llamaContext.n_cur < llamaContext.n_len && !Task.isCancelled {
             let completion = await llamaContext.completion_loop_with_grammar(grammar: grammar)
             result.append(contentsOf: completion.piece)
+            if result.contains(#/\n+/#) {
+                break
+            }
             if completion.state != .normal {
                 break
             }

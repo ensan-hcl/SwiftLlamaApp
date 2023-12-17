@@ -39,12 +39,14 @@ final class LlamaGrammar {
     ws ::= ([ \t\n] ws)?
     """#)
     }
-
-    static var japanese: LlamaGrammar? {
+    static var japanese_chat: LlamaGrammar? {
         Self(#"""
-    # A probably incorrect grammar for Japanese
-    root        ::= jp-char+ ([ \t\n] jp-char+)*
-    jp-char     ::= hiragana | katakana | punctuation | cjk
+    root             ::= japanese-chat+
+    japanese-chat    ::= ai-message | user-message | "\n"
+    ai-message       ::= "Alan:" message
+    user-message     ::= "User:" message
+    message          ::= jp-char+ ([ \t\n] jp-char+)*
+    jp-char          ::= hiragana | katakana | punctuation | cjk
     hiragana    ::= [ぁ-ゟ]
     katakana    ::= [ァ-ヿ]
     punctuation ::= [、-〾]

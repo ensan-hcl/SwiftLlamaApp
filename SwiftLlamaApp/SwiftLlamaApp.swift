@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftLlamaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EmotionEstimationView()
         }
     }
 }

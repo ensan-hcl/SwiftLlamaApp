@@ -55,7 +55,7 @@ struct ContentView: View {
                 ScrollViewReader { proxy in
                     VStack(alignment: .leading) {
                         ForEach(self.model.chatLog.messages) { message in
-                            HStack {
+                            HStack(alignment: .top) {
                                 let (systemImage, backgroundCornerRadii, backgroundColor): (String, RectangleCornerRadii, Color) = switch message.role {
                                 case .system:
                                     ("info.bubble", .init(topLeading: 0, bottomLeading: 10, bottomTrailing: 10, topTrailing: 10), .gray)
@@ -86,24 +86,6 @@ struct ContentView: View {
             }
         }
         .padding()
-        .task {
-            print(LlamaGrammar.japanese)
-            guard let jsonGrammar = LlamaGrammar.japanese else {
-                return
-            }
-            let result = try? await self.model.generateWithGrammar(prompt: "私の名前は", grammar: jsonGrammar)
-
-//            self.model.chatLog.messages.append(contentsOf: [
-//                .init(role: .user, message: "沖縄の観光スポットを10個教えて"),
-//                .init(role: .ai, message: " 沖縄は観光スポットが多くて選べませんが、沖縄美ら海水族館、北谷ビーチ、沖縄戦跡、首里城、沖縄モノレール、沖縄セルラーパーク、桜島、牧志公園、恩納村、浜比嘉島が人気です。"),
-//                .init(role: .user, message: "東京の観光スポットを10個教えて"),
-//                .init(role: .ai, message: " 東京の観光スポットは多くて選べませんが、東京タワー、東京駅、浅草寺、上野公園、増上寺、国立西洋美術館、新宿御苑、明治神宮、国立科学博物館、日本民芸館、浅草橋が人気です。"),
-//                .init(role: .user, message: "北海道の観光スポットを10個教えて"),
-//                .init(role: .ai, message: " 北海道の観光スポットは多くて選べませんが、ニセコ、富良野、十勝、札幌、小樽、函館、倶知安、洞爺湖、美瑛、積丹岬が人気です。"),
-//                .init(role: .user, message: "大阪の観光スポットを10個教えて"),
-//                .init(role: .ai, message: " 大阪の観光スポットは多くて選べませんが、USJ、大阪城、天保山、グリーンヒルホテル大阪、通天閣、グローバルランド、海遊館、大阪ミニatureミュージアム、大阪市科学館、大阪ファミリーパーク、アサヒビール記念館が人気です。")
-//            ])
-        }
     }
 }
 

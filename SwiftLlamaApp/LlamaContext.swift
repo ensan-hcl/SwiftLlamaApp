@@ -38,11 +38,13 @@ actor LlamaContext {
     }
 
     private static var ctx_params: llama_context_params {
+        let n_threads = max(1, min(8, ProcessInfo.processInfo.processorCount - 2))
+        print("Using \(n_threads) threads")
         var ctx_params = llama_context_default_params()
         ctx_params.seed = 1234
         ctx_params.n_ctx = 2048
-        ctx_params.n_threads = 8
-        ctx_params.n_threads_batch = 8
+        ctx_params.n_threads       = UInt32(n_threads)
+        ctx_params.n_threads_batch = UInt32(n_threads)
         ctx_params.n_batch = 1024
         return ctx_params
     }
@@ -95,15 +97,10 @@ actor LlamaContext {
             print(String(cString: token_to_piece(token: id) + [0]))
         }
 
-        batch.n_tokens = Int32(tokens_list.count)
-
-        for i1 in 0..<batch.n_tokens {
+        llama_batch_clear(&batch)
+        for i1 in 0..<tokens_list.count {
             let i = Int(i1)
-            batch.token[i] = tokens_list[i]
-            batch.pos[i] = i1
-            batch.n_seq_id[Int(i)] = 1
-            batch.seq_id[Int(i)]![0] = 0
-            batch.logits[i] = 0
+            llama_batch_add(&batch, tokens_list[i], Int32(i), [0], false)
         }
         batch.logits[Int(batch.n_tokens) - 1] = 1 // true
 
@@ -125,7 +122,7 @@ actor LlamaContext {
     }
 
     func completion_loop() -> CompletionStatus {
-        print("n_len = \(n_len), n_cur = \(n_cur), rand = \(Int.random(in: 0..<10))")
+        print("n_len = \(n_len), n_cur = \(n_cur)")
         var new_token_id: llama_token = 0
 
         let n_vocab = llama_n_vocab(model)
@@ -141,14 +138,12 @@ actor LlamaContext {
         candidates.withUnsafeMutableBufferPointer() { buffer in
             // common/sampling.hを参照すると良い
             var candidates_p = llama_token_data_array(data: buffer.baseAddress, size: buffer.count, sorted: false)
-            llama_sample_temp(context, &candidates_p, 0.8)
+            llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
+            llama_sample_top_k(context, &candidates_p, 40, 2)
             llama_sample_top_p(context, &candidates_p, 0.95, 2)
             llama_sample_min_p(context, &candidates_p, 0.05, 2)
-            llama_sample_top_k(context, &candidates_p, 40, 2)
-            llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
-            //            new_token_id = llama_sample_token_greedy(context, &candidates_p)
+            llama_sample_temp(context, &candidates_p, 0.8)
             new_token_id = llama_sample_token(context, &candidates_p)
-
         }
 
         if new_token_id == llama_token_eos(context) {
@@ -178,15 +173,8 @@ actor LlamaContext {
         }
         print("n_cur: \(n_cur)", new_token_str)
 
-        batch.n_tokens = 0
-
-        batch.token[Int(batch.n_tokens)] = new_token_id
-        batch.pos[Int(batch.n_tokens)] = n_cur
-        batch.n_seq_id[Int(batch.n_tokens)] = 1
-        batch.seq_id[Int(batch.n_tokens)]![0] = 0
-        batch.logits[Int(batch.n_tokens)] = 1 // true
-        batch.n_tokens += 1
-
+        llama_batch_clear(&batch)
+        llama_batch_add(&batch, new_token_id, n_cur, [0], true)
         n_decode += 1
 
         n_cur += 1
@@ -199,7 +187,7 @@ actor LlamaContext {
     }
 
     func completion_loop_with_grammar(grammar: LlamaGrammar) -> CompletionStatus {
-        print("n_len = \(n_len), n_cur = \(n_cur), rand = \(Int.random(in: 0..<10))")
+        print("n_len = \(n_len), n_cur = \(n_cur)")
         var new_token_id: llama_token = 0
 
         let n_vocab = llama_n_vocab(model)
@@ -211,17 +199,17 @@ actor LlamaContext {
         for token_id in 0..<n_vocab {
             candidates.append(llama_token_data(id: token_id, logit: logits![Int(token_id)], p: 0.0))
         }
-        //        print("sample")
         candidates.withUnsafeMutableBufferPointer() { buffer in
             // common/sampling.hを参照すると良い
             var candidates_p = llama_token_data_array(data: buffer.baseAddress, size: buffer.count, sorted: false)
-            llama_sample_temp(context, &candidates_p, 0.8)
+            //            llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
+            llama_sample_grammar(context, &candidates_p, grammar.grammar)
+            llama_sample_top_k(context, &candidates_p, 40, 2)
+            //            llama_sample_tail_free(context, &candidates_p, 1.0, 2)
+//                        llama_sample_typical(context, &candidates_p, 1, 2)
             llama_sample_top_p(context, &candidates_p, 0.95, 2)
             llama_sample_min_p(context, &candidates_p, 0.05, 2)
-            llama_sample_top_k(context, &candidates_p, 40, 2)
-            llama_sample_repetition_penalties(context, &candidates_p, tokens_list, 64, 1.0, 0.0, 0.0)
-            llama_sample_grammar(context, &candidates_p, grammar.grammar)
-            //            new_token_id = llama_sample_token_greedy(context, &candidates_p)
+            llama_sample_temp(context, &candidates_p, 0.8)
             new_token_id = llama_sample_token(context, &candidates_p)
             llama_grammar_accept_token(context, grammar.grammar, new_token_id);
         }
@@ -253,14 +241,8 @@ actor LlamaContext {
         }
         print("n_cur: \(n_cur)", new_token_str)
 
-        batch.n_tokens = 0
-
-        batch.token[Int(batch.n_tokens)] = new_token_id
-        batch.pos[Int(batch.n_tokens)] = n_cur
-        batch.n_seq_id[Int(batch.n_tokens)] = 1
-        batch.seq_id[Int(batch.n_tokens)]![0] = 0
-        batch.logits[Int(batch.n_tokens)] = 1 // true
-        batch.n_tokens += 1
+        llama_batch_clear(&batch)
+        llama_batch_add(&batch, new_token_id, n_cur, [0], true)
 
         n_decode += 1
 
@@ -277,6 +259,22 @@ actor LlamaContext {
         self.tokens_list.removeAll()
         self.temporary_invalid_cchars.removeAll()
         try? self.reset_context()
+    }
+
+    func llama_batch_clear(_ batch: inout llama_batch) {
+        batch.n_tokens = 0
+    }
+
+    func llama_batch_add(_ batch: inout llama_batch, _ id: llama_token, _ pos: llama_pos, _ seq_ids: [llama_seq_id], _ logits: Bool) {
+        batch.token   [Int(batch.n_tokens)] = id
+        batch.pos     [Int(batch.n_tokens)] = pos
+        batch.n_seq_id[Int(batch.n_tokens)] = Int32(seq_ids.count)
+        for i in 0..<seq_ids.count {
+            batch.seq_id[Int(batch.n_tokens)]![Int(i)] = seq_ids[i]
+        }
+        batch.logits  [Int(batch.n_tokens)] = logits ? 1 : 0
+
+        batch.n_tokens += 1
     }
 
     private func tokenize(text: String, add_bos: Bool) -> [llama_token] {
