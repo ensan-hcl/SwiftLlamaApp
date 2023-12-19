@@ -16,7 +16,7 @@
 		559AB66D2B31A04400AECF98 /* VehicleAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559AB66C2B31A04400AECF98 /* VehicleAssistantView.swift */; };
 		55A1E8F82B2EA73100150D05 /* EmotionEstimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A1E8F72B2EA73100150D05 /* EmotionEstimationView.swift */; };
 		55A1E8FA2B2EA9C000150D05 /* tinyllama-1.1b-intermediate-step-715k-1.5t.Q2_K.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 55A1E8F92B2EA9C000150D05 /* tinyllama-1.1b-intermediate-step-715k-1.5t.Q2_K.gguf */; platformFilter = ios; };
-		55CF43702B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 55CF436F2B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf */; platformFilters = (macos, ); };
+		55CF43702B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 55CF436F2B2D79E400DFBDDA /* ELYZA-japanese-Llama-2-7b-instruct-q4_K_M.gguf */; };
 		55CF43722B2DF11A00DFBDDA /* LlamaGrammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF43712B2DF11A00DFBDDA /* LlamaGrammar.swift */; };
 		55CF43782B2DF4F200DFBDDA /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 55CF43772B2DF4F200DFBDDA /* llama */; };
 		55CF43802B2E03DC00DFBDDA /* grammar-parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 55CF437E2B2E03DC00DFBDDA /* grammar-parser.cpp */; };
